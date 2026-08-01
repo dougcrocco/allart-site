@@ -1693,6 +1693,14 @@
   @media (min-width: 601px) and (max-width: 900px) { #sticky-cta { right: 0 !important; bottom: 120px !important; font-size: 15px !important; padding: 17px 40px 17px 32px !important; } #sticky-cta svg { width: 17px !important; height: 17px !important; } }
   .sec-pager-btn:hover { color: var(--accent,#FDD125) !important; }
   @media (max-width: 700px) { .cred-row { grid-template-columns: 1fr 1fr !important; } .cred-cell:nth-child(2) { border-right: none !important; } .cred-cell:nth-child(1), .cred-cell:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,.12); } .cred-cell { padding: 30px 18px !important; } }
+  /* Wide screens: the panel is already capped at 1200px, so the 50vw gutter math
+     double-counts and squeezes the quote into a thin column. Zero it out. */
+  @media (min-width: 1025px) {
+    #clients .clients-featured-split .client-top-block { padding-left: 0 !important; padding-right: 48px !important; }
+    #clients .clients-featured-side { padding-right: 0 !important; }
+    #clients .clients-featured-split { grid-template-columns: 1.25fr 1fr !important; gap: 48px !important; }
+    #clients .client-top-block .cq-slide { --cq-fs: clamp(34px, 2.6vw, 46px) !important; }
+  }
   /* Split view: TRUSTED BY sits on the same baseline as IN THEIR WORDS. */
   @media (min-width: 1025px) {
     #clients .clients-featured-split .client-top-block > div:first-child { margin-top: 28px !important; }
@@ -4163,7 +4171,6 @@
 <img decoding="async" loading="lazy" data-asset="images/hero-gallery-install.webp" src="images/hero-gallery-install.webp" alt="">
 <img decoding="async" loading="lazy" data-asset="images/hero-bh-install-c.jpg" src="images/hero-bh-install-c.jpg" alt="">
 <img decoding="async" loading="lazy" data-asset="images/hero-installer.jpg" src="images/hero-installer.jpg" alt="">
-<img decoding="async" loading="lazy" data-asset="images/hero-painting.jpg" src="images/hero-painting.jpg" alt="">
 <img decoding="async" loading="lazy" data-asset="images/gal-bh-install.jpg" src="images/gal-bh-install.jpg" alt="">
 <img decoding="async" loading="lazy" data-asset="images/hero-clean-still.jpg" src="images/hero-clean-still.jpg" alt="">
 <img decoding="async" loading="lazy" data-asset="images/fine-art-packing-crating-still.jpg" src="images/fine-art-packing-crating-still.jpg" alt="">
@@ -5417,7 +5424,7 @@
         <a class="faq-idx-link" style="--band:url(images/experience-feature.jpg)" data-faq-tab="rates" data-faq-target="faqq-payment-sec">Accepted forms of payment?</a>
         <a class="faq-idx-link" style="--band:url(images/gal-living.jpg)" data-faq-tab="policy" data-faq-target="faqq-11">What's your privacy policy?</a>
         <a class="faq-idx-link" style="--band:url(images/svc-packing.jpg)" data-faq-tab="policy" data-faq-target="faqq-12">Condition reports?</a>
-        <a class="faq-idx-link" style="--band:url(images/svc-crates-hires.jpg)" data-faq-tab="policy" data-faq-target="faqq-13">Is allART:LA insured?</a>
+        <a class="faq-idx-link" style="--band:url(images/svc-crates-hires.jpg)" data-faq-tab="policy" data-faq-target="faqq-13">Is allART insured?</a>
         <a class="faq-idx-link" style="--band:url(images/gal-lounge.jpg)" data-faq-tab="policy" data-faq-target="faqq-14">Changes &amp; cancellations?</a>
       </div>
     </div>
@@ -5562,8 +5569,8 @@
         <p style="font-family:'Mulish',sans-serif;font-size:15px;line-height:1.6;color:#444;margin:0">Yes, if we receive a piece that came with a condition report we are happy to go over the work and compare for any changes. We can fill out new condition reports upon request when delivering or receiving an object.</p>
       </div>
       <div class="faq-qbox" style="background:rgba(255,255,255,.72);padding:22px 24px;box-shadow:0 10px 28px rgba(15,31,67,.18)">
-        <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(22px,3vw,32px);line-height:1.05;letter-spacing:-.5px;text-transform:uppercase;color:#0f1f43;margin:0 0 18px" id="faqq-13">Is allART:LA insured?</h3>
-        <p style="font-family:'Mulish',sans-serif;font-size:15px;line-height:1.6;color:#444;margin:0">Yes, allART:LA and its installers are covered with proper liability insurance and workers comp. Additional insurance can be purchased specialized for your job as needed.</p>
+        <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(22px,3vw,32px);line-height:1.05;letter-spacing:-.5px;text-transform:uppercase;color:#0f1f43;margin:0 0 18px" id="faqq-13">Is allART insured?</h3>
+        <p style="font-family:'Mulish',sans-serif;font-size:15px;line-height:1.6;color:#444;margin:0">Yes, allART and its installers are covered with proper liability insurance and workers comp. Additional insurance can be purchased specialized for your job as needed.</p>
       </div>
       <div class="faq-qbox" style="background:rgba(255,255,255,.72);padding:22px 24px;box-shadow:0 10px 28px rgba(15,31,67,.18)">
         <h3 style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(22px,3vw,32px);line-height:1.05;letter-spacing:-.5px;text-transform:uppercase;color:#0f1f43;margin:0 0 18px" id="faqq-14">Holds, changes, &amp; cancellations?</h3>
