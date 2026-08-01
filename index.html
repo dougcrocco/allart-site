@@ -3993,6 +3993,36 @@
     #services .svc-info-panel[data-open="true"] > div:has(> .svc-action-btn) { max-width: 580px !important; }
   }
 
+  /* Desktop: the detail copy was set for a 580px column and read small against a
+     full-bleed photo. Scale the lede, the cells, and the CTA up a step. */
+  @media (min-width: 1025px) {
+    #services .svc-info-panel[data-open="true"] > div:has(> .svc-included-list),
+    #services .svc-info-panel[data-open="true"] > div:has(> .svc-action-btn) { max-width: 680px !important; }
+    #services .svc-info-panel[data-open="true"] > div:has(> .svc-included-list) > p:first-child {
+      font-size: clamp(18px,1.25vw,22px) !important; line-height: 1.55 !important;
+    }
+    #services .svc-info-panel[data-open="true"] .svc-included-list li {
+      font-size: clamp(15px,1.02vw,17.5px) !important; line-height: 1.4 !important; padding: 16px 18px !important;
+    }
+    #services .svc-info-panel[data-open="true"] .svc-action-btn {
+      font-size: 14px !important; letter-spacing: 1.6px !important; padding: 17px 30px !important;
+    }
+  }
+
+  /* 601–700px fell between the two systems: the panel zeroes its own side padding
+     for tablet, but the shared child gutter only starts at 701px — so title, copy,
+     and cells sat flush to the screen edge with no top air either. */
+  @media (min-width: 601px) and (max-width: 700px) {
+    #services .svc-info-panel[data-open="true"] { padding-top: clamp(28px,4.5vh,52px) !important; }
+    #services .svc-info-panel[data-open="true"] > div:has(> h3),
+    #services .svc-info-panel[data-open="true"] > div:has(> .svc-included-list),
+    #services .svc-info-panel[data-open="true"] > div:has(> .svc-action-btn) {
+      box-sizing: border-box !important;
+      padding-left: 34px !important; padding-right: 28px !important;
+      width: 100% !important;
+    }
+  }
+
   /* Desktop + tablet: yellow buttons stack like the phone layout, left-aligned. */
   @media (min-width: 701px) {
     #services .svc-info-panel[data-open="true"] > div:has(> .svc-action-btn) {
