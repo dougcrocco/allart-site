@@ -7768,8 +7768,9 @@ class Component extends DCLogic {
       if (!row) return;
       const nav = document.querySelector('nav');
       const navH = nav ? nav.getBoundingClientRect().height : 84;
-      // Tight gap on phone/tablet so the SERVICES heading clears the viewport.
-      const gap = window.innerWidth <= 1024 ? 8 : 40;
+      // Tight gap at every width — a larger desktop gap left the SERVICES heading
+      // half-visible and clipped by the header.
+      const gap = 8;
       const y = row.getBoundingClientRect().top + window.pageYOffset - navH - gap;
       if (this._smoothScrollTo) this._smoothScrollTo(y); else window.scrollTo({ top: y, behavior: 'smooth' });
     }));
