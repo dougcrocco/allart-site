@@ -4110,7 +4110,14 @@
       margin-left: 0 !important; margin-right: 0 !important; padding-left: 0 !important; padding-right: 0 !important;
     }
     #services .svc-info-panel[data-open="true"] .svc-included-list { max-width: 620px !important; }
-    #services .svc-info-panel[data-open="true"] > button[aria-label="Close"] { z-index: 6 !important; }
+    /* The blanket position:relative above pulls Close into the copy column — pin it back
+       to the panel's top-right corner at every desktop width. */
+    #services .svc-info-panel[data-open="true"] > button[aria-label="Close"] {
+      position: absolute !important; top: clamp(20px,2.4vh,32px) !important;
+      right: clamp(28px,3vw,56px) !important; left: auto !important;
+      width: auto !important; max-width: none !important; margin: 0 !important; padding: 0 !important;
+      z-index: 8 !important;
+    }
   }
   /* Every copy block in About matches the "Who We Are" body copy. */
   @media (min-width: 701px) {
