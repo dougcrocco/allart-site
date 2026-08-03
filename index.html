@@ -7928,9 +7928,9 @@ class Component extends DCLogic {
       const nav = document.querySelector('nav');
       const navH = nav ? nav.getBoundingClientRect().height : 70;
       let y;
-      // Phone: sit the tab row tight under the header so the SERVICES heading
-      // scrolls fully out of view (a 40px gap left it peeking on short screens).
-      const gap = window.innerWidth <= 1024 ? 8 : 40;
+      // Tight at every width — a 40px desktop gap left the SERVICES heading
+      // peeking out and clipped by the header.
+      const gap = 8;
       if (row) y = row.getBoundingClientRect().top + window.pageYOffset - navH - gap;
       else if (sec) y = sec.getBoundingClientRect().top + window.pageYOffset - 12;
       else return;
@@ -8248,7 +8248,7 @@ class Component extends DCLogic {
       this.setGalTab(tab);
     });
     attach('services', ['overview', 'install', 'consult', 'fab', 'all'], () => (this.state.svcTab === '' ? 'all' : (this.state.svcTab || 'install')), (tab) => {
-      if (tab === 'all') { this.setState({ svcTab: '', svcInfo: -1 }); const row = document.querySelector('#svc-nav'); if (row) { const nav = document.querySelector('nav'); const navH = nav ? nav.getBoundingClientRect().height : 70; const y = row.getBoundingClientRect().top + window.pageYOffset - navH - 40; if (this._smoothScrollTo) this._smoothScrollTo(y); else window.scrollTo({ top: y, behavior: 'smooth' }); } return; }
+      if (tab === 'all') { this.setState({ svcTab: '', svcInfo: -1 }); const row = document.querySelector('#svc-nav'); if (row) { const nav = document.querySelector('nav'); const navH = nav ? nav.getBoundingClientRect().height : 70; const y = row.getBoundingClientRect().top + window.pageYOffset - navH - 8; if (this._smoothScrollTo) this._smoothScrollTo(y); else window.scrollTo({ top: y, behavior: 'smooth' }); } return; }
       this.setState({ svcTab: tab, svcInfo: -1 });
     });
     attach('faq', ['intro', 'faq', 'rates', 'policy', 'all'], () => this.state.drawerOpen ? this.state.faqTab : 'all', (tab) => {
@@ -8911,7 +8911,7 @@ class Component extends DCLogic {
       if (!row) return;
       const nav = document.querySelector('nav');
       const navH = nav ? nav.getBoundingClientRect().height : 84;
-      const y = row.getBoundingClientRect().top + window.pageYOffset - navH - 40;
+      const y = row.getBoundingClientRect().top + window.pageYOffset - navH - 8;
       if (this._smoothScrollTo) this._smoothScrollTo(y); else window.scrollTo({ top: y, behavior: 'smooth' });
     }));
   }
