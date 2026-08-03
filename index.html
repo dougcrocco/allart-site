@@ -4915,7 +4915,7 @@
         <p style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#7a7a7a;margin:36px 0 0">Private Residence</p>
         <p style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#7a7a7a;margin:6px 0 0">Bel Air, CA</p>
       </div>
-      <img decoding="async" loading="lazy" data-asset="images/case-goldbath-c.jpg" src="images/case-goldbath-c.jpg" onClick="{{openCaseGallery5}}" alt="Old-master oil painting set into a gilded oval above a mirror in a gold-leaf powder room" style="width:100%;height:100%;object-fit:cover;min-height:50vh;cursor:zoom-in">
+      <img decoding="async" loading="lazy" data-asset="images/case-goldbath-v2.jpg" src="images/case-goldbath-v2.jpg" onClick="{{openCaseGallery5}}" alt="Old-master oil painting set into a gilded oval above a mirror in a gold-leaf powder room" style="width:100%;height:100%;object-fit:cover;min-height:50vh;cursor:zoom-in">
     </div>
     </div>
     <div class="case-mobile gv-home" onClick="{{openCaseGalleryMobile}}" style="display:none;margin:0 0 8px;cursor:zoom-in">
@@ -9039,8 +9039,8 @@ class Component extends DCLogic {
     this._lbCap = (u) => {
       if (!u) return '';
       const m = String(u).match(/([a-z0-9-]+)\.(jpg|jpeg|png|webp)/i);
-      // Compression passes append a -c suffix; match on the original stem.
-      const k = m && m[1].replace(/-c$/, '');
+      // Compression appends -c and re-crops append -v2 etc; match on the original stem.
+      const k = m && m[1].replace(/-v\d+$/, '').replace(/-c$/, '');
       return (k && CAPS[k]) || '';
     };
     this._stepDetails = [
@@ -9462,32 +9462,32 @@ class Component extends DCLogic {
         this.setState({ lightboxSrc: 'open', lightboxKind: 'landscape', lightboxIdx: 0 });
       },
       openCaseGallery0: () => {
-        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg'].map(R);
+        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg'].map(R);
         this.setState({ lightboxSrc: 'open', lightboxKind: 'portrait', lightboxIdx: 0 });
       },
       openCaseGallery1: () => {
-        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg'].map(R);
+        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg'].map(R);
         this.setState({ lightboxSrc: 'open', lightboxKind: 'portrait', lightboxIdx: 1 });
       },
       openCaseGallery2: () => {
-        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg'].map(R);
+        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg'].map(R);
         this.setState({ lightboxSrc: 'open', lightboxKind: 'portrait', lightboxIdx: 2 });
       },
       openCaseGallery3: () => {
-        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg'].map(R);
+        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg'].map(R);
         this.setState({ lightboxSrc: 'open', lightboxKind: 'portrait', lightboxIdx: 3 });
       },
       openCaseGallery4: () => {
-        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg'].map(R);
+        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg'].map(R);
         this.setState({ lightboxSrc: 'open', lightboxKind: 'portrait', lightboxIdx: 4 });
       },
       openCaseGallery5: () => {
-        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg'].map(R);
+        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg'].map(R);
         this.setState({ lightboxSrc: 'open', lightboxKind: 'portrait', lightboxIdx: 5 });
       },
       openCaseGalleryMobile: () => {
         if (window.innerWidth <= 600) { this.setState({ caseExpanded: true }); requestAnimationFrame(() => { if (this._updateSeeAllUp) this._updateSeeAllUp(); }); return; }
-        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-c.jpg'].map(R);
+        this._lbKeys = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg']; this._lbSrcs = ['images/experience-feature.jpg', 'images/case-salon-photo-c.jpg', 'images/experience-alcove2-c.jpg', 'images/case-elevator.jpg', 'images/case-curve-c.jpg', 'images/case-goldbath-v2.jpg'].map(R);
         const card = document.querySelector('.case-mobile.gv-home');
         const i = card ? parseInt(card.getAttribute('data-idx') || '0', 10) : 0;
         this.setState({ lightboxSrc: 'open', lightboxKind: 'portrait', lightboxIdx: i || 0 });
