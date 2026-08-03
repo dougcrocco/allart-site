@@ -328,7 +328,7 @@
   .faq-index { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0 40px; width: 100%; margin: 2px 0 6px; align-items: start; }
   .faq-index[data-hide="true"] { display: none; }
   .faq-idx-group { margin: 0 0 30px; }
-  .faq-idx-photo { display:block; width:100%; aspect-ratio:12/5; object-fit:cover; margin:16px 0 24px; background:#0c0c0e; }
+  .faq-idx-photo { display:block; width:100%; aspect-ratio:12/5; object-fit:cover; margin:0 0 20px; background:#0c0c0e; }
   @media (max-width:900px){ .faq-idx-photo { aspect-ratio:16/6; margin:14px 0 18px; } }
   @media (max-width:600px){ .faq-idx-photo { aspect-ratio:16/7; margin:12px 0 16px; } }
   .faq-idx-group:last-child { margin-bottom: 6px; }
@@ -589,8 +589,9 @@
   .faq-chip-group .tab-chip[data-active="true"] > .svc-wipe { display: none !important; }
   #svc-nav .gal-cat > .svc-chev { position: relative; z-index: 1; font-size: 17px; line-height: 1; opacity: .5; transition: transform .3s ease, opacity .25s ease; }
   @media (hover: hover) {
-    #svc-nav .gal-cat:hover { background: transparent !important; color: #fff !important; border-color: #fff !important; letter-spacing: 1.5px !important; transform: scale(1.06); z-index: 3; }
-    #svc-nav .gal-cat:hover > .svc-wipe { width: 100%; }
+    /* Match the Gallery tabs exactly: white border, white wipe, no scale. */
+    #svc-nav .gal-cat:hover { background: transparent !important; color: #fff !important; border-color: #fff !important; letter-spacing: .5px !important; transform: none !important; z-index: 3; }
+    #svc-nav .gal-cat:hover > .svc-wipe { width: 100% !important; background: rgba(255,255,255,.22) !important; }
     #experience .gal-cat:hover { background: transparent !important; color: #fff !important; border-color: #fff !important; letter-spacing: .5px !important; transform: none !important; z-index: 3; }
     #experience .gal-cat:hover > .svc-wipe { width: 100% !important; }
   }
@@ -1221,7 +1222,7 @@
     line-height: 1; padding: 0; margin-left: 4px; transition: color .25s ease;
     display: inline-flex; align-items: center;
   }
-  .svc-swipe-dots .svc-dot-seeall[data-active="true"] { color: var(--accent,#FDD125) !important; }
+  .svc-swipe-dots .svc-dot-seeall[data-active="true"] { color: #fff !important; }
   @media (min-width: 601px) and (max-width: 900px) {
     .gal-swipe-dots, .faq-swipe-dots, .client-swipe-dots, .svc-swipe-dots { display: flex !important; justify-content: center; gap: 10px; margin: 18px 0 26px; width: 100% !important; flex: 1 1 100% !important; }
     .gal-cat-row, .svc-nav-row { justify-content: center !important; width: 100%; }
@@ -1280,8 +1281,14 @@
     #services:has(.svc-sub-install a:hover) #svc-nav .gal-cat[data-svctab="install"]:not([data-active="true"]),
     #services:has(.svc-sub-consult a:hover) #svc-nav .gal-cat[data-svctab="consult"]:not([data-active="true"]),
     #services:has(.svc-sub-fab a:hover) #svc-nav .gal-cat[data-svctab="fab"]:not([data-active="true"]) {
-      background: transparent !important; color: #fff !important; border-color: rgba(253,209,37,.6) !important;
-      letter-spacing: 1.2px !important; transform: scale(1.08); z-index: 3;
+      background: transparent !important; color: #fff !important; border-color: #fff !important;
+      letter-spacing: .5px !important; transform: none !important; z-index: 3;
+    }
+    /* …and the same white wipe the direct rollover uses. */
+    #services:has(.svc-sub-install a:hover) #svc-nav .gal-cat[data-svctab="install"]:not([data-active="true"]) > .svc-wipe,
+    #services:has(.svc-sub-consult a:hover) #svc-nav .gal-cat[data-svctab="consult"]:not([data-active="true"]) > .svc-wipe,
+    #services:has(.svc-sub-fab a:hover) #svc-nav .gal-cat[data-svctab="fab"]:not([data-active="true"]) > .svc-wipe {
+      width: 100% !important; background: rgba(255,255,255,.22) !important;
     }
     #services:has(.svc-sub-install a:hover) #svc-nav .gal-cat[data-svctab="install"]::before,
     #services:has(.svc-sub-install a:hover) #svc-nav .gal-cat[data-svctab="install"]::after,
@@ -1289,10 +1296,27 @@
     #services:has(.svc-sub-consult a:hover) #svc-nav .gal-cat[data-svctab="consult"]::after,
     #services:has(.svc-sub-fab a:hover) #svc-nav .gal-cat[data-svctab="fab"]::before,
     #services:has(.svc-sub-fab a:hover) #svc-nav .gal-cat[data-svctab="fab"]::after {
-      opacity: 1; transform: translate(0,0);
+      opacity: 0 !important;
     }
   }
   @media (max-width:600px){ .svc-sub-photo { aspect-ratio:16/10; margin:12px 0 14px; } }
+  /* Phone: the closing note uses the same statement + sub-line pairing as desktop. */
+  @media (max-width:780px){
+    #services[data-svctab=""] .svc-lede .svc-lede-lead { display:none !important; }
+    #services[data-svctab=""] .svc-lede { text-align:center !important; max-width:none !important; }
+    #services[data-svctab=""] .svc-lede .svc-lede-statement {
+      display:block !important; max-width:none !important; margin:0 !important;
+      font-family:'Archivo',sans-serif !important; font-weight:800 !important;
+      font-size:clamp(22px,6.4vw,30px) !important; line-height:1.08 !important;
+      letter-spacing:-.7px !important; text-transform:uppercase !important; color:#f4f2ea !important;
+    }
+    #services[data-svctab=""] .svc-lede .svc-lede-note {
+      display:block !important; max-width:none !important; margin:14px 0 0 !important;
+      font-family:'Mulish',sans-serif !important; font-weight:400 !important;
+      font-size:13.5px !important; line-height:1.6 !important; letter-spacing:0 !important;
+      color:rgba(244,242,234,.62) !important;
+    }
+  }
   .svc-sub-head { font-family:'Arimo',sans-serif; font-weight:700; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent,#FDD125); margin:0 0 4px; }
   .svc-sublink { position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; font-family:'Archivo',sans-serif; font-weight:800; font-size:13px; letter-spacing:.5px; text-transform:uppercase; color:#fff; text-decoration:none; text-align:center; padding:15px 18px; border:2px solid rgba(255,255,255,.5); transition:border-color .3s ease, letter-spacing .3s ease, transform .3s cubic-bezier(.34,1.25,.4,1); cursor:pointer; z-index:0; }
   .svc-sublink::before { content:''; position:absolute; left:0; bottom:0; height:100%; width:0; background:rgba(255,255,255,.13); transition:width .35s cubic-bezier(.5,0,.2,1); z-index:-1; }
@@ -1300,6 +1324,7 @@
   @media (min-width:601px) and (max-width:900px){ .svc-sub-cols { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px 14px; } .svc-sub { gap:10px; } .svc-sub-head { font-size:12px; letter-spacing:1.5px; margin-bottom:4px; } .svc-sublink { padding:16px 8px; font-size:12px; letter-spacing:.3px; text-align:center; } .svc-sub-consult .sub-head-full { display:none; } .svc-sub-consult .sub-head-short { display:inline !important; } }
   @media (max-width:600px){ .svc-sub-cols { grid-template-columns:1fr; gap:26px; } .svc-sub { gap:16px; } .svc-sub-head { font-size:21px; letter-spacing:1.5px; margin-bottom:4px; } .svc-sublink { padding:20px 12px; font-size:17px; letter-spacing:.5px; } }
   @media (max-width:520px){ .svc-sublink { padding:18px 12px; font-size:15px; } }
+
   .svc-info-panel { position: relative !important; transform: none !important; inset: auto !important; max-height: 0; padding-top: 0 !important; padding-bottom: 0 !important; overflow: hidden !important; pointer-events: none; justify-content: flex-start !important; transition: max-height .55s cubic-bezier(.2,.8,.2,1), padding .3s ease; }
   .svc-cyc { transition: background .2s ease, color .2s ease, border-color .2s ease; }
   @keyframes svcContentFade { from { opacity: 0; } to { opacity: 1; } }
@@ -2884,6 +2909,50 @@
       margin: 0 !important; padding: 0 16px !important; text-align: center !important;
     }
   }
+  .svc-sub-video { display:none; }
+  /* Desktop See All uses the FAQ index treatment: one wide video per column, yellow
+     section head, four outlined buttons. Written at element+id specificity so it wins
+     over the older tile-grid rules below regardless of source order. */
+  @media (min-width:781px){
+    section#services[data-svctab=""] .svc-sub-cols {
+      order:1 !important; display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+      gap:0 36px !important; max-width:none !important; margin:0 0 34px !important;
+      padding:0 !important; box-sizing:border-box !important;
+    }
+    section#services[data-svctab=""] .svc-overview,
+    section#services[data-svctab=""] .svc-groups-wrap { display:none !important; }
+    section#services[data-svctab=""] .svc-sub { display:flex !important; flex-direction:column !important; gap:0 !important; }
+    section#services[data-svctab=""] .svc-sub-photo { display:none !important; }
+    section#services[data-svctab=""] .svc-sub-video {
+      display:block !important; width:100% !important; aspect-ratio:4/3 !important;
+      object-fit:cover !important; margin:0 0 20px !important; background:#0c0c0e !important;
+    }
+    section#services[data-svctab=""] .svc-sub-head { display:none !important; }
+    section#services[data-svctab=""] .svc-sublink { font-size:12px !important; letter-spacing:.5px !important; padding:12px 16px !important; margin:0 0 8px !important; border-color:rgba(255,255,255,.5) !important; }
+
+    /* Closing line sits under the three columns as a centred coda, set off by a
+       hairline and a small-caps label rather than reading as another lede. */
+    section#services[data-svctab=""] .svc-lede {
+      order:2 !important; max-width:none !important; margin:-18px auto 0 !important; padding:14px 0 0 !important;
+      text-align:center !important;
+    }
+    /* Statement treatment: the original sentence splits into a headline and a note. */
+    section#services[data-svctab=""] .svc-lede .svc-lede-lead { display:none !important; }
+    section#services[data-svctab=""] .svc-lede .svc-lede-statement {
+      display:block !important; max-width:24ch; margin:0 auto;
+    }
+    section#services[data-svctab=""] .svc-lede .svc-lede-note {
+      display:block !important; max-width:50ch; margin:16px auto 0;
+      /* An earlier rule sets every .svc-lede > span to 25px !important. */
+      font-family:'Mulish',sans-serif !important; font-weight:400 !important;
+      font-size:clamp(13px,.95vw,14.5px) !important; line-height:1.6 !important;
+      letter-spacing:0 !important; color:rgba(244,242,234,.62) !important;
+    }
+    section#services[data-svctab=""] .svc-lede .svc-lede-statement {
+      font-size:clamp(26px,2.5vw,38px) !important; line-height:1.1 !important;
+      letter-spacing:-.9px !important;
+    }
+  }
   /* FINAL: Desktop See All — three columns, one per service group, each a stack of
      photo tiles with the centred title + inline MORE INFO on rollover. */
   @media (min-width: 781px) {
@@ -4198,6 +4267,58 @@
     }
   }
 
+
+  /* ABSOLUTE LAST — tab-row geometry. Several later blocks re-set these rows to
+     content-width centred children at specific breakpoints; this pins Services,
+     Gallery and Clients to one rule: full container width, first button flush
+     with the section heading, three equal columns, even gaps. */
+  #svc-nav.gal-cat-row, #svc-nav,
+  #experience .gal-cat-row, #clients .gal-cat-row {
+    display: flex !important; flex-wrap: nowrap !important; grid-template-columns: none !important;
+    width: 100% !important; max-width: none !important;
+    margin-left: 0 !important; margin-right: 0 !important; padding: 0 !important;
+    justify-content: flex-start !important; align-items: stretch !important;
+    gap: 36px !important; column-gap: 36px !important;
+  }
+  #svc-nav > .gal-cat,
+  #experience .gal-cat-row > .gal-cat,
+  #clients .gal-cat-row > .gal-cat {
+    flex: 1 1 0 !important; min-width: 0 !important; width: auto !important; margin: 0 !important;
+  }
+  @media (max-width: 700px) {
+    #svc-nav.gal-cat-row, #svc-nav,
+    #experience .gal-cat-row, #clients .gal-cat-row { gap: 12px !important; column-gap: 12px !important; }
+  }
+
+  /* Tab labels must fit the equal-width column at every size — the fixed 11–12px
+     sizes below 700px overflow FABRICATION / RESIDENTIAL once the column narrows. */
+  #svc-nav > .gal-cat, #experience .gal-cat-row > .gal-cat, #clients .gal-cat-row > .gal-cat {
+    overflow: hidden !important;
+  }
+  #svc-nav .gal-cat, #experience .gal-cat, #clients .gal-cat {
+    white-space: nowrap !important;
+    padding-left: 8px !important; padding-right: 8px !important;
+    font-size: clamp(8px, 2.05vw, 14px) !important;
+    letter-spacing: .2px !important;
+  }
+  @media (min-width: 781px) {
+    #svc-nav .gal-cat, #experience .gal-cat, #clients .gal-cat {
+      padding-left: 14px !important; padding-right: 14px !important;
+      font-size: clamp(11px, 1.15vw, 14px) !important; letter-spacing: .5px !important;
+    }
+  }
+
+  /* Phone gets the shorter statement, scaled off viewport width so it always
+     fills the measure on exactly one line. */
+  @media (max-width: 600px) {
+    .svc-lede-statement .svcst-full { display: none !important; }
+    .svc-lede-statement .svcst-short { display: inline !important; }
+    #services[data-svctab=""] .svc-lede .svc-lede-statement {
+      white-space: nowrap !important;
+      font-size: 5.7vw !important;
+      letter-spacing: -.03em !important;
+    }
+  }
 </style>
 <script src="./image-slot.js"></script>
 </helmet>
@@ -4348,7 +4469,7 @@
     </div>
     <div id="svc-index" class="svc-sub-cols" style="scroll-margin-top:90px">
       <div class="svc-sub svc-sub-install">
-        <a href="#services" onClick="{{setSvcInstall}}" data-svctab="install" style="display:block;cursor:pointer"><img decoding="async" loading="lazy" class="svc-sub-photo" src="images/art-installation-gallery-wall.jpg" alt="Two art handlers hanging a gilt-framed landscape above a sofa"></a>
+        <a href="#services" onClick="{{setSvcInstall}}" data-svctab="install" style="display:block;cursor:pointer"><img decoding="async" loading="lazy" class="svc-sub-photo" src="images/art-installation-gallery-wall.jpg" alt="Two art handlers hanging a gilt-framed landscape above a sofa"><video class="svc-sub-video" poster="images/fine-art-packing-crating-still.jpg" data-vsrc="images/fine-art-packing-crating.mp4" muted="{{true}}" playsInline="{{true}}" preload="auto" aria-label="Art handlers packing a framed painting"></video></a>
         <span class="svc-sub-head">Hands On</span>
         <a href="#svc0" onClick="{{subLinkGo}}" data-svctab="install" class="svc-sublink">Art Installation</a>
         <a href="#svc7" onClick="{{subLinkGo}}" data-svctab="install" class="svc-sublink">Fine Art Packing</a>
@@ -4356,7 +4477,7 @@
         <a href="#svc9" onClick="{{subLinkGo}}" data-svctab="install" class="svc-sublink">Restoration</a>
       </div>
       <div class="svc-sub svc-sub-consult">
-        <a href="#services" onClick="{{setSvcConsult}}" data-svctab="consult" style="display:block;cursor:pointer"><img decoding="async" loading="lazy" class="svc-sub-photo" src="images/consulting-lift-c.jpg" alt="Art consultant guiding placement of a large work during installation"></a>
+        <a href="#services" onClick="{{setSvcConsult}}" data-svctab="consult" style="display:block;cursor:pointer"><img decoding="async" loading="lazy" class="svc-sub-photo" src="images/consulting-lift-c.jpg" alt="Art consultant guiding placement of a large work during installation"><video class="svc-sub-video" poster="images/art-fair-installation-tour-still.jpg" data-vsrc="images/art-fair-installation-tour.mp4" muted="{{true}}" playsInline="{{true}}" preload="auto" aria-label="A private art fair tour led by allART"></video></a>
         <span class="svc-sub-head"><span class="sub-head-full">Perfect Placement</span><span class="sub-head-short" style="display:none">Perfect Placement</span></span>
         <a href="#svc1" onClick="{{subLinkGo}}" data-svctab="consult" class="svc-sublink">Consulting &amp; Curation</a>
         <a href="#svc11" onClick="{{subLinkGo}}" data-svctab="consult" class="svc-sublink">Relocation Styling</a>
@@ -4364,16 +4485,18 @@
         <a href="#svc8" onClick="{{subLinkGo}}" data-svctab="consult" class="svc-sublink">Art Tours</a>
       </div>
       <div class="svc-sub svc-sub-fab">
-        <a href="#services" onClick="{{setSvcFab}}" data-svctab="fab" style="display:block;cursor:pointer"><img decoding="async" loading="lazy" class="svc-sub-photo" src="images/svc-stretcher.jpg" alt="Canvas stretcher bars built for custom stretching and fabrication"></a>
+        <a href="#services" onClick="{{setSvcFab}}" data-svctab="fab" style="display:block;cursor:pointer"><img decoding="async" loading="lazy" class="svc-sub-photo" src="images/svc-stretcher.jpg" alt="Canvas stretcher bars built for custom stretching and fabrication"><video class="svc-sub-video" poster="images/custom-framing-workshop-still.jpg" data-vsrc="images/custom-framing-workshop.mp4" muted="{{true}}" playsInline="{{true}}" preload="auto" aria-label="Framer fitting a custom frame in the allART workshop"></video></a>
         <span class="svc-sub-head">Custom Built</span>
         <a href="#svc3" onClick="{{subLinkGo}}" data-svctab="fab" class="svc-sublink">Framing</a>
         <a href="#svc2" onClick="{{subLinkGo}}" data-svctab="fab" class="svc-sublink">Stretchers</a>
-        <a href="#svc4" onClick="{{subLinkGo}}" data-svctab="fab" class="svc-sublink">Built Crates</a>
-        <a href="#svc10" onClick="{{subLinkGo}}" data-svctab="fab" class="svc-sublink">Built Pedestals</a>
+        <a href="#svc4" onClick="{{subLinkGo}}" data-svctab="fab" class="svc-sublink">Crates</a>
+        <a href="#svc10" onClick="{{subLinkGo}}" data-svctab="fab" class="svc-sublink">Pedestals</a>
       </div>
     </div>
     <p class="svc-lede" data-seeall="{{svcAllActive}}" style="max-width:60ch;margin:34px 0 4px">
-      <span style="display:block;font-family:'Archivo',sans-serif;font-weight:400;font-size:clamp(17px,1.75vw,22px);line-height:1.3;letter-spacing:-.2px;color:#f4f2ea;text-wrap:balance">All services can stand on their own, or utilize any combination, to finish your project.</span>
+      <span class="svc-lede-lead" style="display:block;font-family:'Archivo',sans-serif;font-weight:400;font-size:clamp(17px,1.75vw,22px);line-height:1.3;letter-spacing:-.2px;color:#f4f2ea;text-wrap:balance">All services can stand on their own, or utilize any combination, to finish your project.</span>
+      <span class="svc-lede-statement" style="display:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(26px,2.5vw,38px);line-height:1.1;letter-spacing:-.9px;text-transform:uppercase;color:#f4f2ea;text-wrap:balance"><span class="svcst-full">One service, or any combination.</span><span class="svcst-short" style="display:none">One service, or all.</span></span>
+      <span class="svc-lede-note" style="display:none;font-family:'Mulish',sans-serif;font-weight:400;font-size:clamp(11px,.75vw,12px);line-height:1.6;color:rgba(244,242,234,.62);text-wrap:pretty">Each one stands on its own. Combine any of them and we run the project end to end.</span>
     </p>
     <div class="svc-overview" style="position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:0;padding:6px;box-sizing:border-box;overflow:hidden;background:#000"><div class="ov-tiles" style="width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;min-height:min(1000px, calc(100vh - 210px));aspect-ratio:auto"><a href="#services" onClick="{{setSvcInstall}}" onMouseEnter="{{ovPeekOn}}" onMouseLeave="{{ovPeekOff}}" data-peektab="install" class="ov-tile" aria-label="Handling" style="position:relative;display:block;overflow:hidden;height:100%;text-decoration:none;background:#0b0c10"><img decoding="async" loading="lazy" src="images/art-installation-gallery-wall.jpg" alt="allART crew installing framed artwork on a gallery wall" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .7s cubic-bezier(.2,.7,.2,1)"><span class="ov-tile-veil" style="position:absolute;inset:0;z-index:1;transition:background .3s ease"></span><span class="ov-cap" style="position:absolute;top:36%;left:0;right:0;bottom:auto;z-index:2;box-sizing:border-box;padding:0 34px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:18px"><span class="ov-cap-title" style="font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(16px,1.4vw,23px);line-height:1.06;letter-spacing:-.5px;text-transform:uppercase;color:#fff;max-width:20ch;text-shadow:0 2px 20px rgba(0,0,0,.7)">Nothing moves without a plan.</span><span class="ov-cap-sub" style="font-family:'Mulish',sans-serif;font-weight:400;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.86);max-width:30ch;text-shadow:0 1px 14px rgba(0,0,0,.75)">Install, transport, crating and storage.</span><span class="ov-cap-mob" style="display:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(16px,1.4vw,23px);line-height:1.06;letter-spacing:-.5px;text-transform:uppercase;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.85)">Install <br>&amp; transport</span><span class="ov-cap-list" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.9);text-shadow:0 1px 12px rgba(0,0,0,.8);display:flex;flex-direction:column;gap:7px"><span>Installation</span><span>Packing</span><span>Mirrors</span><span>Restoration</span></span></span></a><a href="#services" onClick="{{setSvcConsult}}" onMouseEnter="{{ovPeekOn}}" onMouseLeave="{{ovPeekOff}}" data-peektab="consult" class="ov-tile" aria-label="Consulting" style="position:relative;display:block;overflow:hidden;height:100%;text-decoration:none;background:#0b0c10"><img decoding="async" loading="lazy" src="images/art-consulting-collection-review.jpg" alt="Art consultant reviewing works for a client collection" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .7s cubic-bezier(.2,.7,.2,1)"><span class="ov-tile-veil" style="position:absolute;inset:0;z-index:1;transition:background .3s ease"></span><span class="ov-cap" style="position:absolute;top:36%;left:0;right:0;bottom:auto;z-index:2;box-sizing:border-box;padding:0 34px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:18px"><span class="ov-cap-title" style="font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(16px,1.4vw,23px);line-height:1.06;letter-spacing:-.5px;text-transform:uppercase;color:#fff;max-width:20ch;text-shadow:0 2px 20px rgba(0,0,0,.7)">The right work, in the right room.</span><span class="ov-cap-sub" style="font-family:'Mulish',sans-serif;font-weight:400;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.86);max-width:30ch;text-shadow:0 1px 14px rgba(0,0,0,.75)">Curation, sourcing and collection strategy.</span><span class="ov-cap-mob" style="display:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(16px,1.4vw,23px);line-height:1.06;letter-spacing:-.5px;text-transform:uppercase;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.85)">Curation <br>&amp; sourcing</span><span class="ov-cap-list" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.9);text-shadow:0 1px 12px rgba(0,0,0,.8);display:flex;flex-direction:column;gap:7px"><span>Consulting</span><span>Relocation Styling</span><span>Corporate Art</span><span>Art Tours</span></span></span></a><a href="#services" onClick="{{setSvcFab}}" onMouseEnter="{{ovPeekOn}}" onMouseLeave="{{ovPeekOff}}" data-peektab="fab" class="ov-tile" aria-label="Fabrication" style="position:relative;display:block;overflow:hidden;height:100%;text-decoration:none;background:#0b0c10"><img decoding="async" loading="lazy" data-asset="images/svc-framing.jpg" src="images/svc-framing.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .7s cubic-bezier(.2,.7,.2,1)"><span class="ov-tile-veil" style="position:absolute;inset:0;z-index:1;transition:background .3s ease"></span><span class="ov-cap" style="position:absolute;top:36%;left:0;right:0;bottom:auto;z-index:2;box-sizing:border-box;padding:0 34px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:18px"><span class="ov-cap-title" style="font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(16px,1.4vw,23px);line-height:1.06;letter-spacing:-.5px;text-transform:uppercase;color:#fff;max-width:20ch;text-shadow:0 2px 20px rgba(0,0,0,.7)">MADE FOR THE PIECE, NOT OFF THE SHELF.</span><span class="ov-cap-sub" style="font-family:'Mulish',sans-serif;font-weight:400;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.86);max-width:30ch;text-shadow:0 1px 14px rgba(0,0,0,.75)">Custom builds.</span><span class="ov-cap-mob" style="display:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(16px,1.4vw,23px);line-height:1.06;letter-spacing:-.5px;text-transform:uppercase;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.85)">Custom <br>builds</span><span class="ov-cap-list" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:1.4px;text-transform:uppercase;color:rgba(255,255,255,.9);text-shadow:0 1px 12px rgba(0,0,0,.8);display:flex;flex-direction:column;gap:7px"><span>Framing</span><span>Stretchers</span><span>Crates</span><span>Pedestals</span></span></span></a></div></div>
 
@@ -5418,10 +5541,10 @@
 <div style="height:160px;background:#000"></div>
 
 <!-- ===== FAQ / RATES TEASER ===== -->
-<section id="faq" style="background:#000;border-top:none;padding:94px 0 48px;scroll-margin-top:8px">
+<section id="faq" style="background:#000;border-top:none;padding:70px 0 48px;scroll-margin-top:8px">
   <div style="max-width:1100px;margin:0 auto;padding:0 36px;display:flex;flex-direction:column;align-items:flex-start;gap:0">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;width:100%"><a href="#faq" data-faq-intro="1" style="text-decoration:none;display:inline-block"><h2 class="reveal-title" style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(34px,5.4vw,68px);margin:0 0 14px;color:#fff;letter-spacing:-1.5px;line-height:1;cursor:pointer"><span class="faq-full">FREQUENTLY ASKED</span><span class="faq-short" style="display:none">FAQ</span></h2></a><div class="sec-arrows" style="display:inline-flex;align-items:center;gap:2px;flex:none;padding-bottom:16px"><a href="#clients" aria-label="Previous section" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;color:#fff;text-decoration:none" style-hover="color:#FDD125"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"></path></svg></a><a href="#nextsteps" aria-label="Next section" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;color:#fff;text-decoration:none" style-hover="color:#FDD125"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></a></div></div>
-    <div id="faqTeaserChips" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:34px 0 58px">
+    <div id="faqTeaserChips" style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:26px 0 22px">
       <div class="faq-chip-group" style="display:flex;flex-wrap:nowrap;align-items:center;gap:14px">
       <a class="tab-chip" data-active="{{faqActive}}" onClick="{{openFaq}}" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:#fff;text-decoration:none;background:transparent;border:2px solid #fff;padding:12px 24px;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease"><span class="svc-wipe" aria-hidden="true"></span><span class="svc-lbl"><span class="faqtab-full">Installation</span><span class="faqtab-short">Install</span></span></a>
       <a class="tab-chip" data-active="{{ratesActive}}" onClick="{{openRates}}" style="font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase;color:#fff;text-decoration:none;background:transparent;border:2px solid #fff;padding:12px 24px;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease"><span class="svc-wipe" aria-hidden="true"></span><span class="svc-lbl">Pricing</span></a>
@@ -5438,8 +5561,8 @@
       <a class="ask-inline" data-show="false" href="#contact" onClick="{{askQuestion}}" style="align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;letter-spacing:.3px;text-transform:uppercase;color:var(--accent,#FDD125);text-decoration:none;white-space:nowrap">Ask Us <span style="font-size:15px">→</span></a>
     </div>
     <div class="faq-index" data-hide="{{drawerOpen}}">
-      <div class="faq-idx-group" style="--band:url(images/art-consulting-collection-review.jpg)">
-        <img decoding="async" loading="lazy" class="faq-idx-photo" src="images/art-consulting-collection-review.jpg" alt="Art consultation reviewing works for placement">
+      <div class="faq-idx-group" style="--band:url(images/gal-living.jpg)">
+        <img decoding="async" loading="lazy" class="faq-idx-photo" src="images/gal-living.jpg" alt="Framed works hung above a console in a living room">
         <span class="faq-idx-head">Before We Come</span>
         <a class="faq-idx-link" style="--band:url(images/hero-installer.jpg)" data-faq-tab="faq" data-faq-target="faqq-1">Can one person do the job?</a>
         <a class="faq-idx-link" style="--band:url(images/gal-workday.jpg)" data-faq-tab="faq" data-faq-target="faqq-2">How long will it take?</a>
@@ -5457,8 +5580,8 @@
         <a class="faq-idx-link" style="--band:url(images/hero-bh-install-c.jpg)" data-faq-tab="faq" data-faq-target="faqq-7">Earthquake hardware?</a>
         <a class="faq-idx-link" style="--band:url(images/case-elevator.jpg)" data-faq-tab="faq" data-faq-target="faqq-8">Security hardware?</a>
       </div>
-      <div class="faq-idx-group" style="--band:url(images/svc-packing.jpg)">
-        <img decoding="async" loading="lazy" class="faq-idx-photo" src="images/svc-packing.jpg" alt="Artwork being carefully packed and protected">
+      <div class="faq-idx-group" style="--band:url(images/crate-new-c.jpg)">
+        <img decoding="async" loading="lazy" class="faq-idx-photo" src="images/crate-new-c.jpg" alt="Custom-built crate ready for a work in transit">
         <span class="faq-idx-head">Things To Know</span>
         <a class="faq-idx-link" style="--band:url(images/experience-feature.jpg)" data-faq-tab="rates" data-faq-target="faqq-payment-sec">Accepted forms of payment?</a>
         <a class="faq-idx-link" style="--band:url(images/gal-living.jpg)" data-faq-tab="policy" data-faq-target="faqq-11">What's your privacy policy?</a>
@@ -6269,9 +6392,59 @@ class Component extends DCLogic {
     window.addEventListener('scroll', () => { if (this._peekClearT) clearTimeout(this._peekClearT); this._peekClearT = setTimeout(clear, 260); }, { passive: true });
   }
 
+  // Native listeners on the See All video cards. React's synthetic mouseenter and its
+  // muted prop are both unreliable here, and an unmuted video is blocked from playing.
+  // Delegated hover-play for the See All video cards. Two constraints drive this:
+  // the cards mount and unmount with the tab state (so delegation, not per-element
+  // binding), and the asset host doesn't answer range requests — a plain src gives
+  // NETWORK_NO_SOURCE — so the file is streamed once and handed over as a blob URL,
+  // the same approach the hero and service-band videos use.
+  _wireSubVideos() {
+    const cardOf = (e) => (e.target && e.target.closest) ? e.target.closest('.svc-sub > a') : null;
+    const vidOf = (card) => card && card.querySelector('video.svc-sub-video');
+    const start = (v) => {
+      try {
+        v.muted = true;
+        if (!v._endWired) { v._endWired = true; v.addEventListener('ended', () => { try { v.currentTime = 0; } catch (e) {} }); }
+        const p = v.play(); if (p && p.catch) p.catch(() => {});
+      } catch (err) {}
+    };
+    const play = (e) => {
+      const card = cardOf(e); const v = vidOf(card);
+      if (!v) return;
+      if (e.relatedTarget && card.contains(e.relatedTarget)) return;
+      v._hover = true;
+      v.muted = true; v.defaultMuted = true; v.setAttribute('muted', ''); v.playsInline = true;
+      if (!v._fetched) {
+        v._fetched = true;
+        const key = v.getAttribute('data-vsrc');
+        const url = (this._assetMap && this._assetMap[key]) || key;
+        fetch(url)
+          .then(r => r.ok ? r.blob() : Promise.reject(new Error('HTTP ' + r.status)))
+          .then(b => { v.src = URL.createObjectURL(b); if (v._hover) start(v); })
+          .catch(err => { v._fetched = false; console.warn('svc video fetch failed', key, err); });
+        return;
+      }
+      start(v);
+    };
+    const stop = (e) => {
+      const card = cardOf(e); const v = vidOf(card);
+      if (!v) return;
+      if (e.relatedTarget && card.contains(e.relatedTarget)) return;
+      v._hover = false;
+      // Let the clip finish rather than snapping back to the poster — it only
+      // rewinds once it has played to the end (loop is off for that reason).
+      try { if (v.ended) v.currentTime = 0; } catch (err) {}
+    };
+    this._subVidOver = play; this._subVidOut = stop;
+    document.addEventListener('mouseover', play);
+    document.addEventListener('mouseout', stop);
+  }
+
   componentDidMount() {
     this._wirePeekSafety();
     this._applyDataImgs();
+    this._wireSubVideos();
     this._initHeroVideo();
     this._setupMarqueeDrag();
 
@@ -8586,6 +8759,8 @@ class Component extends DCLogic {
     if (this._mtrustRaf) cancelAnimationFrame(this._mtrustRaf);
     if (this._cityMarqueeMeasure) window.removeEventListener('resize', this._cityMarqueeMeasure);
     if (this._heroTimer) clearInterval(this._heroTimer);
+    if (this._subVidOver) document.removeEventListener('mouseover', this._subVidOver);
+    if (this._subVidOut) document.removeEventListener('mouseout', this._subVidOut);
     if (this._swipes) this._swipes.forEach(([s, a, b]) => { s.removeEventListener('touchstart', a); s.removeEventListener('touchend', b); });
     if (this._onClientOutside) document.removeEventListener('click', this._onClientOutside);
     if (this._onScroll) {
